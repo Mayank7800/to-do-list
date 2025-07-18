@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+    <link href="https://fonts.googleapis.com/css2?family=Muli:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .navbar {
+            background-color: #007BFF;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content:space-between;
+            height: 58px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            margin-left: 64px;
+        }
+
+        .navbar a:hover {
+            opacity: 0.5;
+            font-size: 18px;
+        }
+
+        body {
+            font-family: 'Muli', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .main-wrap {
+            max-width: 600px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007BFF;
+            font-size: 33px;
+        }
+
+        form label {
+            font-weight: bold;
+        }
+
+        form input,
+        form textarea {
+            width: 97%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form button {
+
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+        .byn-flex {
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn {
+            margin-bottom: 20px;
+            width: 127px;
+            font-size: larger;
+        }
+
+        .card {
+            background-color: rgba(162, 224, 255, 0.1);
+            position: relative;
+            width: fit-content;
+            padding: 10px 20px;
+            border: 1px solid #48a8dd !important;
+            border-radius: 6px;
+            font-size: 16px;
+            margin-left: 30px;
+            box-shadow: 0px -2px 11px 0px rgba(0, 0, 0, .1), 4px 2px 4px 4px rgb(0 0 0 / 6%) !important;
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .img {
+            margin: 32px;
+            margin-top: 80px;
+            width: 45rem;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+    <div>
+        <a href="/tasks">View Tasks</a>
+        <a href="/tasks/add">Add Task</a>
+        </div>
+        <div>
+        <a href="/logout">Logout</a> <!-- Logout Link -->
+        </div>
+    </div>
+    <div class="card">
+        <div class="byn-flex">
+            <div class="main-wrap">
+                <h3>Add a New Task</h3>
+                <form action="/tasks/add" method="post">
+                    <label for="title">Task Title:</label>
+                    <input type="text" id="title" name="title" placeholder="Task Title" required>
+                    <label for="description">Task Description:</label>
+                    <textarea id="description" name="description" placeholder="Task Description"></textarea>
+                    <label for="priority">Priority:</label>
+                    <select id="priority" name="priority">
+                        <option value="LOW">Low</option>
+                        <option value="MEDIUM">Medium</option>
+                        <option value="HIGH">High</option>
+                    </select>
+                    <label for="deadline">Deadline:</label>
+                    <input type="date" id="deadline" name="deadline" required>
+                    <div class="byn-flex"> <button type="submit" class="btn">Add Task</button></div>
+
+                </form>
+            </div>
+        </div>
+        <div>
+            <img class="img" src="https://www.aihr.com/wp-content/uploads/employee-task-list-template-cover.jpg">
+        </div>
+
+    </div>
+</body>
+
+</html>

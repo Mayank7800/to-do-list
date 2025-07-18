@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Tasks</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .navbar {
+            background-color: #007BFF;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content:space-between;
+            height: 58px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            margin-left: 64px;
+        }
+
+        .navbar a:hover {
+            opacity: 0.5;
+            font-size: 18px;
+        }
+
+        body {
+            font-family: 'Muli', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            color: #8dadd0;
+        }
+
+        .main-wrap {
+            max-width: 900px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007BFF;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th,
+        table td {
+            text-align: left;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        table th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .reminder {
+            color: red;
+            font-weight: bold;
+        }
+
+        .card {
+            background-color: rgba(162, 224, 255, 0.1);
+            position: relative;
+            width: fit-content;
+            padding: 10px 20px;
+            border: 1px solid #48a8dd !important;
+            border-radius: 6px;
+            font-size: 16px;
+            margin-left: 338px;
+            box-shadow: 0px -2px 11px 0px rgba(0, 0, 0, .1), 4px 2px 4px 4px rgb(0 0 0 / 6%) !important;
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .complete-btn {
+            padding: 5px 10px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .complete-btn:disabled {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+    <div>        <a href="/tasks">View Tasks</a>
+        <a href="/tasks/add">Add Task</a>
+        </div>
+        <div>
+         <a href="/logout">Logout</a> <!-- Logout Link -->
+        </div>
+        
+    </div>
+    <div class="card">
+        <div class="main-wrap">
+            <h3>Your Tasks</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Priority</th>
+                        <th>Deadline</th>
+                        <th>Reminder</th>
+                        <th>Completed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="task : ${tasks}">
+                        <td th:text="${task.title}"></td>
+                        <td th:text="${task.description}"></td>
+                        <td th:text="${task.priority}"></td>
+                        <td th:text="${task.deadline}"></td>
+                        <td>
+                            <span th:if="${task.isDeadlineNear() && !task.completed}" class="reminder">
+                                Nearing Deadline!
+                            </span>
+                            <span th:if="${!task.isDeadlineNear() || task.completed}">-</span>
+                        </td>
+                        <td th:text="${task.completed ? 'Yes' : 'No'}"></td>
+                        <td>
+                            <form th:action="@{/tasks/complete}" method="post">
+                                <input type="hidden" name="taskId" th:value="${task.id}" />
+                                <button type="submit" th:disabled="${task.completed}" class="complete-btn">
+                                    Mark as Complete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
